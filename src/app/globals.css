@@ -1,33 +1,65 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind typography;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer base {
+/*
+    #content {
+        h1 {
+            @apply text-4xl mb-4 font-semibold;
+        }
+    
+        h2 {
+            @apply text-2xl mb-2 mt-8 font-semibold;
+        }
+    
+        p {
+            @apply mb-4
+        }
+    
+        pre {
+            @apply text-sm text-balance font-mono bg-slate-200
+            rounded-3xl py-8 my-4;
+        }
+    
+        ul, ol {
+            @apply mb-4 ml-6 md:ml-12
+        }
+
+        ul {
+            @apply list-decimal
+        }
+
+        ol {
+            @apply list-disc
+        }
+    
+        a {
+            @apply underline text-sky-500;
+        }
+    
+        li {
+            @apply pl-4
+        }
+
+        img {
+            @apply mx-auto max-h-[500px] my-6
+        }
+    }
+*/
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+@layer components {
+    sup {
+        /* For some reason footnote appears on top of the nav bar
+        putting z-index to -10 fixes but the link doesn't work */
+        z-index: 0;
+    }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .custom404 {
+        color: #000; /* Fallback for older browsers */
+        color: rgba(0, 0, 0, 0);
+        -webkit-text-stroke: 2.5px #E75D2A;
+      }
 }
