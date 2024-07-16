@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const MDXComponents = {
   table: (props: React.TableHTMLAttributes<HTMLTableElement>) => (
@@ -16,6 +17,25 @@ const MDXComponents = {
   td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => (
     <td className="px-6 py-4" {...props} />
   ),
+  a: (props: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) => {
+    let href = props.href;
+  
+    // Internal links
+    if (href?.startsWith('/')) {
+      return (
+        <Link href={href} {...props}>
+          {props.children}
+        </Link>
+      );
+    }
+
+    // Anchor links
+    if (href?.startsWith('#')) {
+      return <a {...props}></a>
+    }
+  
+    return <a target="_blank" rel="noopener noreferrer" {...props} />;
+  }
 };
 
 export default MDXComponents;

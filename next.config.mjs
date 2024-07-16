@@ -1,12 +1,13 @@
 import nextMdx from '@next/mdx'
 import remarkGfm from 'remark-gfm'
+import remarkCustomHeaderId from 'remark-custom-header-id'
 
 const withMdx = nextMdx({
   // By default only the `.mdx` extension is supported.
   extension: /\.mdx?$/,
   options: {
     // More MDX Options
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, remarkCustomHeaderId],
   }
 })
 

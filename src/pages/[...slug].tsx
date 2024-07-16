@@ -1,4 +1,3 @@
-
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 import { promises as fs } from 'fs';
@@ -7,6 +6,7 @@ import matter from 'gray-matter';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
+import remarkCustomHeaderId from 'remark-custom-header-id';
 import { glob } from 'glob';
 import Head from 'next/head';
 
@@ -50,7 +50,9 @@ export const getStaticProps: GetStaticProps<BlogPostProps> = async ({ params }) 
 
     const { content, data } = matter(source);
     const mdxSource = await serialize(content, { 
-      mdxOptions: { remarkPlugins: [remarkGfm]},
+      mdxOptions: {
+         remarkPlugins: [remarkGfm, remarkCustomHeaderId]
+      },
       scope: data 
     });
 
