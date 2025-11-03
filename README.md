@@ -1,4 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ontario Tech University CS Wiki Page
+
+**A lightweight, static website providing information, guidance, and resources for the Ontario Tech University Computer Science Department.**
+
+### Core Principles
+
+1. **Lightweight** – Fast loading and minimal dependencies
+
+2. **Easy to Modify** – Content updates require no complex setup
+
+3. **Easy to Maintain** – Simple structure with minimal upkeep
+
+This site is built with [Next.JS](https://nextjs.org/docs) as the web framework and [Tailwind](https://tailwindcss.com/docs) as the CSS Framework. 
 
 ## Getting Started
 
@@ -14,23 +26,50 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Once running, open [http://localhost:3000](http://localhost:3000) in your browser to view the site
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## File and Location Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Creating a new page or blog post can be done simply by adding an `.mdx` file inside the `src/pages/content` directory.
 
-## Learn More
+**For example:**
+* Adding a `contact.mdx` file in `src/pages/content` will create a page accessible at `http://localhost:3000/contact`.
+* Adding a `information.mdx` file in `src/pages/content/contact` will create a page accessible at `http://localhost:3000/contact/information`.
 
-To learn more about Next.js, take a look at the following resources:
+The MDX files use the GitHub Flavoured Markdown (GFM). Example of this format can be viewed at `printing/linux` or `printing/windows`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src
+|-- app
+|-- components                      <-- Global components
+|       `-- navbar
+|              `-- linklists.tsx    <-- Modify this file to add links to the navbar
+|-- pages
+|     `-- content                   <-- Add new pages/blog posts here
+|            |-- home.mdx           <-- Default landing page
+|            `-- printing
+|                   `-- linux.mdx   <-- Accessible via "localhost:3000/printing/linux"
+|-- [..slug.tsx]                    <-- Handles dynamic static page generation
+`-- 404.tsx                         <-- Custom 404 page
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Maintainance
 
-## Deploy on Vercel
+This project is intentionally minimal to simplify maintenance. To keep dependencies up to date, you can run:
+```
+npm update
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The site relies only on essential packages that improve stability and reduce load times.
+Notable dependencies include:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+* **remarkGFM**: Adds support for GitHub Flavored Markdown
+* **gray-matter**: Parses front-matter from a string or file
+* **sharp**: Optimizes and resizes images for web performance
+* **glob**: Allows finding files in the filesystem using glob patterns
+
+With all these packages and lightweight design, the current site uses only __3 MB__ to __5 MB__ of memory.
+
+## Containerization
+
+Thanks to Next.js, containerizing this site is straightforward. The included Dockerfile is based on the official [Next.js Docker template](https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile).
